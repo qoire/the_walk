@@ -1,17 +1,23 @@
 package com.qoire.the_walk.screens;
 
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.qoire.the_walk.the_walk;
+import com.qoire.the_walk.utils.Constants;
 
 /**
  * Created by MSI\ysun on 6/16/14.
  */
 public class MenuScreen extends AbstractScreen {
-    private static final float BUTTON_WIDTH = 300f;
-    private static final float BUTTON_HEIGHT = 60f;
-    private static final float BUTTON_SPACING = 10f;
+
 
     public MenuScreen(the_walk game) {
         super(game);
+    }
+
+    @Override
+    public void show() {
+        super.show();
     }
 
 }
