@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Music;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.Interpolation;
 import com.badlogic.gdx.scenes.scene2d.Action;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
@@ -35,7 +36,7 @@ public class SplashScreen extends AbstractScreen {
 
         splashImage.getColor().a = 0f;
 
-        splashImage.addAction(sequence(fadeIn(0.75f), delay(2.25f), fadeOut(0.75f),
+        splashImage.addAction(sequence(fadeIn(0.75f), moveBy(30, 0, 2, new Interpolation.Exp(5,1)), delay(2.25f), fadeOut(0.75f),
                 new Action() {
                     @Override
                     public boolean act(float delta) {
