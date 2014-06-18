@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
  */
 public class BallImage extends Image {
 
+    private static final float PI = 3.14159f;
     private Body body;
     private BodyDef bodyDef;
     private CircleShape circle;
@@ -20,16 +21,21 @@ public class BallImage extends Image {
         super(drawable);
         this.world = world;
         initPhysics();
+        setOrigin(getWidth()/2, getHeight()/2);
         //implements an object
     }
 
     @Override
     public void act(float delta) {
         positionCenter(body.getPosition().x, body.getPosition().y);
+        setRotation(body.getAngle()*180f/PI);
     }
 
+
+    /** Box2D Related **/
+
     private void positionCenter(float x, float y) {
-        setPosition(x - getImageWidth()/2, y - getImageWidth()/2);
+        setPosition(x - getWidth()/2, y - getHeight()/2);
     }
 
     private void initPhysics() {
