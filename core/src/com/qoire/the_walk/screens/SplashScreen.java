@@ -21,6 +21,11 @@ import static com.badlogic.gdx.scenes.scene2d.actions.Actions.*;
  */
 public class SplashScreen extends AbstractScreen {
 
+    /** class specific definitions **/
+    private Drawable splashDrawable;
+    private Image splashImage;
+    private Music bgm;
+
     public SplashScreen(the_walk game) {
         super(game);
     }
@@ -29,24 +34,14 @@ public class SplashScreen extends AbstractScreen {
     public void show() {
         super.show();
         //load necessary
-        Drawable splashDrawable = new TextureRegionDrawable(new TextureRegion(new Texture("images/img/rhymusplash.png")));
+        splashDrawable = new TextureRegionDrawable(new TextureRegion(new Texture("images/img/rhymusplash.png")));
         //Drawable pokemonDrawable = new TextureRegionDrawable(new TextureRegion(new Texture("images/img/pokemon.png")));
 
-        Music bgm = Gdx.audio.newMusic(Gdx.files.internal("sound/bgm/deadmau5_i_forget.mp3"));
+        bgm = Gdx.audio.newMusic(Gdx.files.internal("sound/bgm/deadmau5_i_forget.mp3"));
 
 
-        Image splashImage = new Image(splashDrawable, Scaling.none);
+        splashImage = new Image(splashDrawable, Scaling.none);
         //Image pokemonImage = new Image(pokemonDrawable, Scaling.none);
-
-        //set index
-        splashImage.setZIndex(0);
-        //pokemonImage.setZIndex(1);
-
-        //set position
-        //pokemonImage.setPosition(Constants.SCREEN_WIDTH/2 - pokemonImage.getWidth()/2,
-        //                         Constants.SCREEN_HEIGHT/2 - pokemonImage.getHeight()/2);
-
-        //Gdx.app.log( the_walk.LOG, "Pokemon: " + pokemonImage.getWidth());
 
 
 
@@ -60,6 +55,7 @@ public class SplashScreen extends AbstractScreen {
                     @Override
                     public boolean act(float delta) {
                         //get new screen
+                        game.setScreen(game.getFirstScreen());
                         return true;
                     }
                 }
@@ -79,6 +75,7 @@ public class SplashScreen extends AbstractScreen {
 
     @Override
     public void dispose() {
+        bgm.dispose();
         super.dispose();
     }
 }

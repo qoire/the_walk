@@ -5,6 +5,8 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.FPSLogger;
+import com.qoire.the_walk.screens.FirstScreen;
+import com.qoire.the_walk.screens.MenuScreen;
 import com.qoire.the_walk.screens.SplashScreen;
 
 public class the_walk extends Game {
@@ -15,14 +17,22 @@ public class the_walk extends Game {
     public the_walk() {}
 
     public SplashScreen getSplashScreen() {
-        return new SplashScreen( this );
+        return new SplashScreen(this);
+    }
+
+    public MenuScreen getMenuScreen() {
+        return new MenuScreen(this);
+    }
+
+    public FirstScreen getFirstScreen() {
+        return new FirstScreen(this);
     }
 
     @Override
     public void create() {
         Gdx.app.log(the_walk.LOG, "Creating game");
         fpsLogger = new FPSLogger();
-        setScreen(getSplashScreen());
+        setScreen(getFirstScreen());
     }
 
     @Override
