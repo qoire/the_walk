@@ -7,11 +7,11 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
-import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.qoire.the_walk.actors.BallImage;
 import com.qoire.the_walk.the_walk;
+import com.qoire.the_walk.utils.BodyEditorLoader;
 
 /**
  * Created by MSI\ysun on 6/18/14.
@@ -23,9 +23,9 @@ public class FirstScreen extends AbstractScreen {
     World world = new World(new Vector2(0, -80), true);
 
     //box2d members
-    private CircleShape circle;
     private PolygonShape groundBox;
     private BallImage ball;
+    private Body FloorBody;
 
     public FirstScreen(the_walk game) {
         super(game);
@@ -37,7 +37,7 @@ public class FirstScreen extends AbstractScreen {
         //define an image
         Drawable ballDrawable = new TextureRegionDrawable(new TextureRegion(new Texture("images/img/great_ball.png")));
 
-        BallImage ball = new BallImage(ballDrawable, world);
+        ball = new BallImage(ballDrawable, world);
         //define ground
         BodyDef groundBodyDef = new BodyDef();
         groundBodyDef.position.set(new Vector2(0, 0));
@@ -49,6 +49,7 @@ public class FirstScreen extends AbstractScreen {
         groundBox.setAsBox(camera.viewportWidth, 10.0f);
         groundBody.createFixture(groundBox, 0.0f);
 
+        createFloor();
 
         //add actors to stage:
         stage.addActor(ball);
@@ -71,7 +72,23 @@ public class FirstScreen extends AbstractScreen {
 
     @Override
     public void dispose() {
-        circle.dispose();
+        ball.dispose();
         groundBox.dispose();
+    }
+
+    private void createFloor() {
+        BodyEditorLoader loader = new BodyEditorLoader(Gdx.files.internal("body/floor.body"));
+
+        BodyDef bd = new BodyDef();
+        bd.position.set(0, 0);
+        bd.type = BodyDef.BodyType.StaticBody;
+
+        FixtureDef fd = new FixtureDef();
+        fd.density = 1;
+        fd.friction = 0.5f;
+        fd.restitution = 0.3f;
+
+        FloorBody = world.createBody(bd);
+        loader.attachFixture(FloorBody, "tempbody", fd, stage.getWidth()/3f);
     }
 }
