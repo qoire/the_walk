@@ -30,26 +30,32 @@ public class SplashScreen extends AbstractScreen {
         super.show();
         //load necessary
         Drawable splashDrawable = new TextureRegionDrawable(new TextureRegion(new Texture("images/img/rhymusplash.png")));
-        Drawable pokemonDrawable = new TextureRegionDrawable(new TextureRegion(new Texture("images/img/pokemon.png")));
+        //Drawable pokemonDrawable = new TextureRegionDrawable(new TextureRegion(new Texture("images/img/pokemon.png")));
 
         Music bgm = Gdx.audio.newMusic(Gdx.files.internal("sound/bgm/deadmau5_i_forget.mp3"));
 
 
         Image splashImage = new Image(splashDrawable, Scaling.none);
-        Image pokemonImage = new Image(pokemonDrawable, Scaling.none);
+        //Image pokemonImage = new Image(pokemonDrawable, Scaling.none);
 
         //set index
         splashImage.setZIndex(0);
-        pokemonImage.setZIndex(1);
+        //pokemonImage.setZIndex(1);
 
         //set position
-        pokemonImage.setPosition(Constants.SCREEN_WIDTH/2 - splashImage.getImageWidth()/2,
-                                 Constants.SCREEN_HEIGHT/2 - splashImage.getImageHeight()/2);
+        //pokemonImage.setPosition(Constants.SCREEN_WIDTH/2 - pokemonImage.getWidth()/2,
+        //                         Constants.SCREEN_HEIGHT/2 - pokemonImage.getHeight()/2);
+
+        //Gdx.app.log( the_walk.LOG, "Pokemon: " + pokemonImage.getWidth());
+
+
 
         //define actions
         splashImage.setFillParent(true);
         splashImage.getColor().a = 0f;
-        splashImage.addAction(sequence(fadeIn(0.75f), moveBy(30, 0, 2, new Interpolation.Exp(5,1)), delay(2.25f), fadeOut(0.75f),
+        splashImage.addAction(sequence(fadeIn(0.75f),
+                delay(2.25f),
+                fadeOut(0.75f),
                 new Action() {
                     @Override
                     public boolean act(float delta) {
@@ -58,8 +64,9 @@ public class SplashScreen extends AbstractScreen {
                     }
                 }
                 ));
+
         stage.addActor(splashImage);
-        stage.addActor(pokemonImage);
+        //stage.addActor(pokemonImage);
 
         //play bgm
         bgm.play();
