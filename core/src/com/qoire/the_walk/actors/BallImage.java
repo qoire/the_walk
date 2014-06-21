@@ -25,6 +25,13 @@ public class BallImage extends Image {
         //implements an object
     }
 
+    public BallImage(Drawable drawable, World world, float x, float y) {
+        super(drawable);
+        this.world = world;
+        initPhysics(x, y);
+        setOrigin(getWidth()/2, getHeight()/2);
+    }
+
     @Override
     public void act(float delta) {
         positionCenter(body.getPosition().x, body.getPosition().y);
@@ -54,6 +61,25 @@ public class BallImage extends Image {
         fixtureDef.restitution = 0.6f;
 
         body.createFixture(fixtureDef);
+    }
+
+    private void initPhysics(float x, float y) {
+        bodyDef = new BodyDef();
+        bodyDef.type = BodyDef.BodyType.DynamicBody;
+        bodyDef.position.set(x, y);
+
+        body = world.createBody(bodyDef);
+        circle = new CircleShape();
+        circle.setRadius(8f);
+
+        FixtureDef fixtureDef = new FixtureDef();
+        fixtureDef.shape = circle;
+        fixtureDef.density = 1.0f;
+        fixtureDef.friction = 0.4f;
+        fixtureDef.restitution = 0.6f;
+
+        body.createFixture(fixtureDef);
+
     }
 
     public void dispose() {

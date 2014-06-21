@@ -9,6 +9,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.badlogic.gdx.utils.Array;
 import com.qoire.the_walk.actors.BallImage;
 import com.qoire.the_walk.the_walk;
 import com.qoire.the_walk.utils.BodyEditorLoader;
@@ -26,6 +27,7 @@ public class FirstScreen extends AbstractScreen {
     private PolygonShape groundBox;
     private BallImage ball;
     private Body FloorBody;
+    private Array<BallImage> ballArray;
 
     public FirstScreen(the_walk game) {
         super(game);
@@ -48,6 +50,13 @@ public class FirstScreen extends AbstractScreen {
         groundBox = new PolygonShape();
         groundBox.setAsBox(camera.viewportWidth, 10.0f);
         groundBody.createFixture(groundBox, 0.0f);
+
+        ballArray = new Array<BallImage>();
+
+        for (int i = 0; i < 100; i++) {
+            ballArray.add(new BallImage(ballDrawable, world, i, i));
+            stage.addActor(ballArray.get(i));
+        }
 
         createFloor();
 
