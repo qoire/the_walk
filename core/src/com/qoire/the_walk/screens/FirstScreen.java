@@ -21,7 +21,7 @@ public class FirstScreen extends AbstractScreen {
 
     Box2DDebugRenderer debugRenderer = new Box2DDebugRenderer();
     OrthographicCamera camera = new OrthographicCamera(1280, 720);
-    World world = new World(new Vector2(0, -80), true);
+    World world = new World(new Vector2(0, -200), true);
 
     //box2d members
     private PolygonShape groundBox;
@@ -53,8 +53,8 @@ public class FirstScreen extends AbstractScreen {
 
         ballArray = new Array<BallImage>();
 
-        for (int i = 0; i < 100; i++) {
-            ballArray.add(new BallImage(ballDrawable, world, i, i));
+        for (int i = 0; i < 1000; i++) {
+            ballArray.add(new BallImage(ballDrawable, world, i*5, 300));
             stage.addActor(ballArray.get(i));
         }
 
@@ -81,6 +81,10 @@ public class FirstScreen extends AbstractScreen {
 
     @Override
     public void dispose() {
+        //delete stuff
+        for (BallImage ball : ballArray) {
+            ball.dispose();
+        }
         ball.dispose();
         groundBox.dispose();
     }
