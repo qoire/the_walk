@@ -53,7 +53,7 @@ public class FirstScreen extends AbstractScreen {
 
         ballArray = new Array<BallImage>();
 
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 1001; i++) {
             ballArray.add(new BallImage(ballDrawable, world, i*5, 300));
             stage.addActor(ballArray.get(i));
         }
