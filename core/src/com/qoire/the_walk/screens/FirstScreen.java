@@ -10,7 +10,7 @@ import com.badlogic.gdx.physics.box2d.*;
 import com.badlogic.gdx.scenes.scene2d.utils.Drawable;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
 import com.badlogic.gdx.utils.Array;
-import com.qoire.the_walk.actors.BallImage;
+import com.qoire.the_walk.actors.actor.BallImage;
 import com.qoire.the_walk.the_walk;
 import com.qoire.the_walk.utils.BodyEditorLoader;
 
@@ -76,7 +76,7 @@ public class FirstScreen extends AbstractScreen {
         stage.act( delta );
         stage.draw();
 
-        debugRenderer.render(world, camera.combined);
+        //debugRenderer.render(world, camera.combined);
     }
 
     @Override
